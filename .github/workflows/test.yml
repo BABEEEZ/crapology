@@ -1,0 +1,22 @@
+name: test 
+
+on:
+  schedule:
+    - cron: '0 9 * * *'  # Every day at 9 AM UTC
+  workflow_dispatch:
+
+jobs:
+  contribute:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Make a test commit
+        run: |
+          echo "$(date)" >> activity.log
+          git config --global user.name "BABEEEZ"
+          git config --global user.email "bbab3369@gmail.com"
+          git add .
+          git commit -m "activity update"
+          git push
